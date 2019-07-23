@@ -6,7 +6,8 @@ import tensorflow as tf
 
 
 INPUT_NODE = 784    # 输入节点 784（一张图片28*28，共有784个像素点）个
-OUTPUT_NODE = 10    # 输出10数，表示该图片为0~9之间的概率
+OUTPUT_NODE = 10    # 输出10数，这个等于要预测类别的数目。在这里表示的是该图片为0~9之间的概率
+
 LAYER1_NODE = 500   # 隐藏层节点个数
 
 def get_weight(shape, regularizer):
@@ -34,5 +35,5 @@ def forward(x, regularizer):
 
     w2 = get_weight([LAYER1_NODE, OUTPUT_NODE], regularizer)
     b2 = get_bias([OUTPUT_NODE])
-    y =  tf.matmul(y1, w2) + b2
+    y = tf.matmul(y1, w2) + b2
     return y
