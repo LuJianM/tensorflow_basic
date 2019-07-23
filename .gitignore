@@ -1,0 +1,4 @@
+# ignore envrionment
+chapter05_MNIST_test/venv/*
+
+chapter05_MNIST_test/.idea/*
