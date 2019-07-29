@@ -1,18 +1,22 @@
-import time
+import time     # 为了延迟，导入time模块
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 import mnist_forward
 import mnist_backward
 
+# 程序循环的间隔时间为5s
 TEST_INTERVAL_SECS = 5
 
 
 def test(mnist):
+
+    # 使用with tf.Graph()复现计算图
     with tf.Graph().as_default() as g:
         x = tf.placeholder(tf.float32, [None, mnist_forward.INPUT_NODE])
         y_ = tf.placeholder(tf.float32, [None, mnist_forward.OUTPUT_NODE])
         y = mnist_forward.forward(x, None)
 
+        # 实例化带滑动平均的saver对象
         ema = tf.train.ExponentialMovingAverage(mnist_backward.MOVING_AVERAGE_DECAY)
         ema_restore = ema.variables_to_restore()
         saver = tf.train.Saver(ema_restore)

@@ -1,4 +1,6 @@
 # ignore envrionment
+chapter02_tensorflow_first/venv/*
 chapter05_MNIST_test/venv/*
 
+chapter02_tensorflow_first/.idea/*
 chapter05_MNIST_test/.idea/*

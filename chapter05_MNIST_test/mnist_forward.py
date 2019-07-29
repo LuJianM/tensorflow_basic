@@ -1,5 +1,13 @@
 """
 前向传播确定网络结构
+
+需要定义参数w，参数b，推算y的网络结构
+def forward（）：确定网络结构
+
+def get_weight():实现参数w的初始化工作
+
+def get_bias():实现参数b的初始化工作
+
 """
 
 import tensorflow as tf
@@ -23,17 +31,20 @@ def get_weight(shape, regularizer):
         return w
 
 def get_bias(shape):
-    """"""
+    """初始化偏置值"""
     b = tf.Variable(tf.zeros(shape))
     return b
 
 def forward(x, regularizer):
-    """"""
+    """该网络的结构有两层，一个隐藏层和一个输出层"""
+
+    # x为1*784的矩阵，w1是一个784*500的矩阵，b1是一个1*500的矩阵
     w1 = get_weight([INPUT_NODE, LAYER1_NODE], regularizer)
     b1 = get_bias([LAYER1_NODE])
-    y1 = tf.nn.relu(tf.matmul(x, w1) + b1)
+    y1 = tf.nn.relu(tf.matmul(x, w1) + b1)  # 最终结果，y1是一个1*500的矩阵
 
+    # y1为1*500的矩阵，w2为500*10的矩阵，b2为1*10的矩阵
     w2 = get_weight([LAYER1_NODE, OUTPUT_NODE], regularizer)
     b2 = get_bias([OUTPUT_NODE])
-    y = tf.matmul(y1, w2) + b2
+    y = tf.matmul(y1, w2) + b2  # 最终输出，y为一个1*10的矩阵
     return y
